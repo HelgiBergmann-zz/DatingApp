@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DatingApp.API.Data;
+using DatingApp.API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -42,7 +44,6 @@ namespace DatingApp.API.Controllers
                 .ToArray();
                 foreach (var el in weathers) {
                     _context.Add(el);
-                    System.Console.WriteLine(el.Id);
                 }
                 _context.SaveChanges();
             }
@@ -50,6 +51,8 @@ namespace DatingApp.API.Controllers
             
             return Ok(result);
         }
+       
+        [Authorize]
         [HttpGet("{id}")]
         public async Task<WeatherForecast> GetAsync(string id)
         {
