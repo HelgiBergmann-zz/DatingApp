@@ -28,6 +28,7 @@ namespace DatingApp.API.Controllers
             _context = context;
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAsync()
         {
@@ -52,7 +53,6 @@ namespace DatingApp.API.Controllers
             return Ok(result);
         }
        
-        [Authorize]
         [HttpGet("{id}")]
         public async Task<WeatherForecast> GetAsync(string id)
         {
